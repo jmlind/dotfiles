@@ -1,0 +1,56 @@
+{
+  "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true,
+  "explorer.confirmDelete": false,
+  "editor.tabSize": 2,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.startupEditor": "newUntitledFile",
+  "git.confirmSync": false,
+  "extensions.ignoreRecommendations": true,
+  "explorer.confirmDragAndDrop": false,
+  "files.trimTrailingWhitespace": true,
+  "go.useLanguageServer": true,
+  "workbench.colorCustomizations": {
+    "terminal.background": "#282a36",
+    "terminalCursor.background": "#282a36",
+    "terminalCursor.foreground": "#97979b",
+    "terminal.selectionBackground": "#97979b33",
+    "terminal.foreground": "#eff0eb",
+    "terminal.ansiBlack": "#282a36",
+    "terminal.ansiRed": "#ff5c57",
+    "terminal.ansiGreen": "#5af78e",
+    "terminal.ansiYellow": "#f3f99d",
+    "terminal.ansiBlue": "#57c7ff",
+    "terminal.ansiMagenta": "#ff6ac1",
+    "terminal.ansiCyan": "#9aedfe",
+    "terminal.ansiWhite": "#f1f1f0",
+    "terminal.ansiBrightBlack": "#686868",
+    "terminal.ansiBrightRed": "#ff5c57",
+    "terminal.ansiBrightGreen": "#5af78e",
+    "terminal.ansiBrightYellow": "#f3f99d",
+    "terminal.ansiBrightBlue": "#57c7ff",
+    "terminal.ansiBrightMagenta": "#ff6ac1",
+    "terminal.ansiBrightCyan": "#9aedfe",
+    "terminal.ansiBrightWhite": "#eff0eb"
+  },
+  "workbench.editor.showIcons": false,
+  "files.associations": {
+    "*.toml": "toml"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.zoomLevel": 0,
+  "go.lintTool": "staticcheck",
+  "go.lintOnSave": "workspace",
+  "go.buildOnSave": "workspace",
+  "javascript.format.enable": false,
+  "editor.formatOnSave": true,
+  "rust-analyzer.checkOnSave.extraArgs": [
+    "clippy"
+  ],
+  "go.toolsManagement.autoUpdate": true,
+  "redhat.telemetry.enabled": false,
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  }
+}
