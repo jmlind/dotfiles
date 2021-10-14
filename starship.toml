@@ -1,0 +1,54 @@
+prompt_order = [
+    "username",
+    "hostname",
+    "battery",
+    "directory",
+    "git_branch",
+    "git_commit",
+    "git_state",
+    "git_status",
+    "hg_branch",
+    "package",
+    "dotnet",
+    "golang",
+    "java",
+    "nodejs",
+    "python",
+    "ruby",
+    "rust",
+    "terraform",
+    "nix_shell",
+    "conda",
+    "memory_usage",
+    "aws",
+    "kubernetes",
+    "env_var",
+    "cmd_duration",
+    "line_break",
+    "jobs",
+    "time",
+    "character",
+]
+
+[package]
+disabled = true
+
+[kubernetes]
+disabled = false
+
+[python]
+disabled = true
+
+[aws]
+disabled = true
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+
+[character]
+use_symbol_for_status = true
