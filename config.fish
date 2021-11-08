@@ -1,25 +1,13 @@
 # rbenv
-set PATH $HOME/.rbenv/shims $PATH
-status --is-interactive; and source (rbenv init -|psub)
+status --is-interactive; and rbenv init - fish | source
 
 # Aliases
 alias be="bundle exec"
 
-# vertica `vsql`
-# set -x LANG en_US.UTF-8
-# set PATH /opt/vertica/bin $PATH
-
-# golang
-set PATH /usr/local/go/bin $PATH
-set PATH ~/go/bin $PATH
-
-# rust
-set PATH ~/.cargo/bin $PATH
-
 # reset mouse accel
 # defaults write .GlobalPreferences com.apple.mouse.scaling 1
 
-# node
+# when node gets too annoying
 # nvm use default
 
 # sigh
