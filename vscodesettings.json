@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "FiraCode Nerd Font, monospace",
   "editor.fontSize": 14,
   "editor.fontLigatures": true,
   "explorer.confirmDelete": false,
@@ -36,21 +36,42 @@
   },
   "workbench.editor.showIcons": false,
   "files.associations": {
-    "*.toml": "toml"
+    "*.toml": "toml",
+    "*.heex": "html-eex",
+    "*.wgsl": "wgsl"
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "window.zoomLevel": 0,
   "go.lintTool": "staticcheck",
   "go.lintOnSave": "workspace",
-  "go.buildOnSave": "workspace",
-  "javascript.format.enable": false,
   "editor.formatOnSave": true,
-  "rust-analyzer.checkOnSave.extraArgs": [
-    "clippy"
-  ],
   "go.toolsManagement.autoUpdate": true,
   "redhat.telemetry.enabled": false,
   "[sql]": {
-    "editor.defaultFormatter": "mtxr.sqltools"
-  }
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "rubyLsp.rubyVersionManager": "asdf",
+  "rubyLsp.enabledFeatures": {
+
+    "codeActions": true,
+    "diagnostics": false,
+    "documentHighlights": true,
+    "documentLink": true,
+    "documentSymbols": true,
+    "foldingRanges": true,
+    "formatting": false,
+    "hover": true,
+    "inlayHint": true,
+    "onTypeFormatting": true,
+    "selectionRanges": true,
+    "semanticHighlighting": true,
+    "completion": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
+  },
+  "workbench.list.smoothScrolling": true
 }
+

@@ -1,34 +1,32 @@
-prompt_order = [
-    "username",
-    "hostname",
-    "battery",
-    "directory",
-    "git_branch",
-    "git_commit",
-    "git_state",
-    "git_status",
-    "hg_branch",
-    "package",
-    "dotnet",
-    "golang",
-    "java",
-    "nodejs",
-    "python",
-    "ruby",
-    "rust",
-    "terraform",
-    "nix_shell",
-    "conda",
-    "memory_usage",
-    "aws",
-    "kubernetes",
-    "env_var",
-    "cmd_duration",
-    "line_break",
-    "jobs",
-    "time",
-    "character",
-]
+format = """
+$username\
+$hostname\
+$battery\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$package\
+$dotnet\
+$golang\
+$nodejs\
+$java\
+$rust\
+$ruby\
+$terraform\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$kubernetes\
+$env_var\
+$cmd_duration\
+$line_break\
+$jobs\
+$time\
+$character"""
 
 [package]
 disabled = true
@@ -42,6 +40,12 @@ disabled = true
 [aws]
 disabled = true
 
+[ruby]
+disabled = true
+
+[nodejs]
+disabled = true
+
 [[battery.display]]  # "bold red" style when capacity is between 0% and 10%
 threshold = 10
 style = "bold red"
@@ -51,4 +55,4 @@ threshold = 30
 style = "bold yellow"
 
 [character]
-use_symbol_for_status = true
+error_symbol = "[✗](bold red)"
