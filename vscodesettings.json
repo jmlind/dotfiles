@@ -54,7 +54,6 @@
   },
   "rubyLsp.rubyVersionManager": "asdf",
   "rubyLsp.enabledFeatures": {
-
     "codeActions": true,
     "diagnostics": false,
     "documentHighlights": true,
@@ -72,6 +71,6 @@
   "[json]": {
     "editor.defaultFormatter": "numso.prettier-standard-vscode"
   },
-  "workbench.list.smoothScrolling": true
+  "workbench.list.smoothScrolling": true,
+  "workbench.colorTheme": "Catppuccin Macchiato"
 }
-
