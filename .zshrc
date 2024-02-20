@@ -1,7 +1,7 @@
 export PATH=$PATH:$HOME/bin:/opt/homebrew/bin
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='nvim'
-
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY='YES'
 
 plugins=(git asdf)
 
@@ -9,13 +9,21 @@ source $ZSH/oh-my-zsh.sh
 
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fpath=($ZSH/custom/completions $fpath)
+
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 
 alias vim='nvim'
 alias ll='ls -alh'
+
+fs() { goreman $@ start }
+
+kexec() { kubectl exec -it $1 -- /bin/bash }
 
 disappointed() { echo -n " ಠ_ಠ " |tee /dev/tty| xclip -selection clipboard; }
 
