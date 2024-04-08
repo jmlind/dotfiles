@@ -41,12 +41,14 @@ git_clean_branches() {
 
   # Fetch all branches from the remote repository
   git fetch -p
+  
+  git remote prune
 
   # Get a list of local branches
-  local -a local_branches=($(git branch --format='%(refname:lstrip=-1)' --list))
+  local -a local_branches=($(git branch --format='%(refname:short)' --list))
 
   # Get a list of remote branches
-  local -a remote_branches=($(git branch -r --format='%(refname:lstrip=-1)' --list))
+  local -a remote_branches=($(git branch -r --format='%(refname:short)' --list))
 
   # Iterate over local branches
   for local_branch in "${local_branches[@]}"
@@ -58,6 +60,8 @@ git_clean_branches() {
       echo "Deleted local branch: $local_branch"
     fi
   done
+
+  git pull
 }
 
 
