@@ -42,8 +42,6 @@ git_clean_branches() {
   # Fetch all branches from the remote repository
   git fetch -p
   
-  git remote prune
-
   # Get a list of local branches
   local -a local_branches=($(git branch --format='%(refname:short)' --list))
 
