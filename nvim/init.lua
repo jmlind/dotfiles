@@ -56,7 +56,7 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
@@ -202,8 +202,6 @@ require("lazy").setup({
 				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
 				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
 				["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
-				["<leader>ps"] = { name = "[S]earch files", _ = "which_key_ignore" },
-				["<leader>pf"] = { name = "Open [F]ile", _ = "which_key_ignore" },
 			})
 			-- visual mode
 			require("which-key").register({
@@ -322,7 +320,7 @@ require("lazy").setup({
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
-			vim.keymap.set("n", "<leader>pv", vim.cmd.Rex, { desc = "go back to file tree" })
+			vim.keymap.set("n", "<leader>pr", vim.cmd.Rex, { desc = "[R]eturn to file explorer" })
 		end,
 	},
 	{
