@@ -153,17 +153,17 @@ require("lazy").setup({
 		opts = { signs = false },
 	},
 
-
-	require 'jmlind.plugins.autoformat',
-	require 'jmlind.plugins.cellular-automaton',
-	require 'jmlind.plugins.colorscheme',
-	require 'jmlind.plugins.git-signs',
-	require 'jmlind.plugins.lsp',
-	require 'jmlind.plugins.mini',
-	require 'jmlind.plugins.neo-tree',
-	require 'jmlind.plugins.telescope',
-	require 'jmlind.plugins.treesitter',
-	require 'jmlind.plugins.which-key',
+	require("jmlind.plugins.autoformat"),
+	require("jmlind.plugins.cellular-automaton"),
+	require("jmlind.plugins.colorscheme"),
+	require("jmlind.plugins.git-signs"),
+	require("jmlind.plugins.harpoon"),
+	require("jmlind.plugins.lsp"),
+	require("jmlind.plugins.mini"),
+	require("jmlind.plugins.neo-tree"),
+	require("jmlind.plugins.telescope"),
+	require("jmlind.plugins.treesitter"),
+	require("jmlind.plugins.which-key"),
 	-- require 'kickstart.plugins.debug',
 	-- require 'kickstart.plugins.indent_line',
 	-- require 'kickstart.plugins.lint',
@@ -171,7 +171,6 @@ require("lazy").setup({
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    This is the easiest way to modularize your config.
-
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
