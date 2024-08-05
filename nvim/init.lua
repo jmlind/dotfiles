@@ -164,6 +164,7 @@ require("lazy").setup({
 	require("jmlind.plugins.telescope"),
 	require("jmlind.plugins.treesitter"),
 	require("jmlind.plugins.which-key"),
+	require("jmlind.plugins.git-conflict"),
 	-- require 'kickstart.plugins.debug',
 	-- require 'kickstart.plugins.indent_line',
 	-- require 'kickstart.plugins.lint',
