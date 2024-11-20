@@ -22,6 +22,7 @@ return { -- Useful plugin to show you pending keybinds.
 			{ "<leader>w", group = "[W]orkspace" },
 			{ "<leader>w_", hidden = true },
 			{ "<leader>h", desc = "Git [H]unk", mode = "v" },
+			{ "-", desc = "File Explorer (Oil)" },
 		})
 	end,
 }

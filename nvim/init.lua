@@ -153,6 +153,7 @@ require("lazy").setup({
 		opts = { signs = false },
 	},
 
+	require("jmlind.plugins.alpha"),
 	require("jmlind.plugins.autoformat"),
 	require("jmlind.plugins.cellular-automaton"),
 	require("jmlind.plugins.colorscheme"),
@@ -160,7 +161,8 @@ require("lazy").setup({
 	require("jmlind.plugins.harpoon"),
 	require("jmlind.plugins.lsp"),
 	require("jmlind.plugins.mini"),
-	require("jmlind.plugins.neo-tree"),
+	--require("jmlind.plugins.neo-tree"),
+	require("jmlind.plugins.oil"),
 	require("jmlind.plugins.telescope"),
 	require("jmlind.plugins.treesitter"),
 	require("jmlind.plugins.git-conflict"),
