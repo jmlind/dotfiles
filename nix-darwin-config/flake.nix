@@ -22,6 +22,7 @@
 	  pkgs.btop
 	  pkgs.lazygit
 	  pkgs.tmux
+	  pkgs.tmuxifier
 	  pkgs.stow
 	  pkgs.ripgrep
         ];
