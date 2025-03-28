@@ -1,16 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-let 
-  hostname = "homelab";
+{ config, pkgs, lib, ... }:
+let hostname = "homelab";
 in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./arm.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./arm.nix
+    #    ./mars.nix
+    #    ./jellyfin.nix
+  ];
 
   nix = {
     settings.auto-optimise-store = true;
@@ -22,7 +21,7 @@ in {
       options = "--delete-older-than 7d";
     };
   };
-  
+
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -56,15 +55,35 @@ in {
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
+  systemd.tmpfiles.rules =
+    [ "d /mnt/media 0755 homelab users -" "d /mnt/arm 0755 arm arm -" ];
+
+  systemd.mounts = [
+    {
+      enable = true;
+      what = "//mars/media";
+      where = "/mnt/media";
+      type = "cifs";
+      options = "rw"
+    }
+    {
+      enable = true;
+      what = "//mars/media";
+      where = "/mnt/arm";
+      type = "cifs";
+      options = "rw"
+    }
+  ];
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
-  
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${hostname}" = {
     isNormalUser = true;
@@ -72,12 +91,13 @@ in {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIC00UW7jJmEnv1f8T9iXGdjmwJbx33cAHGnAByn8ZR jonathanlind@Jonathans-MacBook-Pro.local"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANroqKe1n3W6W0T+wQzfOExgmg0be+iw1kO22QrfEf8 jonathan@DESKTOP-SMJ6Q81"
-    ]; 
-    packages = with pkgs; [];
+    ];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
 
   security.sudo.wheelNeedsPassword = false;
+  security.sudo.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -88,9 +108,9 @@ in {
     neovim
     gcc # to install lsp packages in nvim
     unzip # to install packages in nvim
-    git 
+    git
     htop
-    iotop 
+    iotop
     wget
     curl
     zsh # shell
@@ -100,6 +120,9 @@ in {
     libdvdread # dvd libs
     docker
     lsscsi # dvd drive
+    cifs-utils # mounting smb share
+    sops
+    age
   ];
 
   programs.zsh.enable = true;
@@ -107,12 +130,10 @@ in {
 
   networking = {
     hostName = hostname;
-    hostId = "ad1f0b4b"; 
-    firewall.allowedTCPPorts = [
-      9090
-    ];
+    hostId = "ad1f0b4b";
+    firewall.allowedTCPPorts = [ 9090 ];
   };
-  
+
   # networking. enables connecting to user@${hostname}.local
   services.avahi = {
     enable = true;

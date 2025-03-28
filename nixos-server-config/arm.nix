@@ -1,4 +1,4 @@
-{
+{ pkgs, lib, ... }: {
   # set up directories with arm user and group ownership
   systemd.tmpfiles.rules = [
     "d /home/arm/logs 0755 arm arm -"
@@ -6,6 +6,7 @@
     "d /home/arm/media 0755 arm arm -"
     "d /home/arm/config 0755 arm arm -"
   ];
+
   # Load the 'sg' kernel module to allow the container to see disk drives
   boot.kernelModules = [ "sg" ];
 
@@ -29,7 +30,7 @@
   # Configure the ARM container
   virtualisation.oci-containers.containers."arm" = {
     autoStart = true; # Automatically start the container on boot
-    image = "automaticrippingmachine/automatic-ripping-machine:latest"; 
+    image = "automaticrippingmachine/automatic-ripping-machine:latest";
     ports = [ "8080:8080" ];
     # TODO: Use id arm to get the UID and GID for the arm user after creation
     environment = {
