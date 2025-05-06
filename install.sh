@@ -14,15 +14,16 @@ echo "Installing dotfiles for $user into $HOME"
 
 pushd $HOME/dotfiles
 
+if [ ! -d .config/ ]; then
+	echo "for some reason this isn't executing from the dotfiles repo. cannot continue"
+	exit 1
+fi
+
 # make directories
 if [ ! -d $HOME/.config/ ]; then
 	mkdir -p $HOME/.config/ &>/dev/null
 fi
 
-if [ ! -d .config/ ]; then
-	echo "for some reason this isn't executing from the dotfiles repo. cannot continue"
-	exit 1
-fi
 
 # stow config
 stow -Rv -t $HOME/.config/ .config
