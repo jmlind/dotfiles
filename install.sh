@@ -9,29 +9,11 @@ fi
 user=`whoami`
 echo "Installing dotfiles for $user into $HOME"
 
-# clone dotfiles repo
-# git clone https://github.com/jmlind/dotfiles $HOME/dotfiles
+# stow using dotfiles syntax, transforming dot- prefixed directories to .<dir> 
+stow -Rv --dotfiles -t ~/ .
 
-pushd $HOME/dotfiles
-
-if [ ! -d .config/ ]; then
-	echo "for some reason this isn't executing from the dotfiles repo. cannot continue"
-	exit 1
-fi
-
-# make directories
-if [ ! -d $HOME/.config/ ]; then
-	mkdir -p $HOME/.config/ &>/dev/null
-fi
-
-
-# stow config
-stow -Rv -t $HOME/.config/ .config
-
-
-# symlink zshrc
-ln -sf $HOME/dotfiles/.zshrc $HOME/.zshrc
-
-popd
+# todo
+# test .config
+# test .tmux.conf
 
 echo "Finished installing config files"

@@ -1,0 +1,15 @@
+\.git
+\.gitignore
+\.gitmodule
+
+^/README.*
+^/LICENSE.*
+
+install.sh
+
+\.DS_Store # thanks
+
+nix-darwin-config
+nixos-server-config
+
+vscodesettings.json
