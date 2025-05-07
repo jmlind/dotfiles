@@ -16,4 +16,10 @@ stow -Rv --dotfiles -t ~/ .
 # test .config
 # test .tmux.conf
 
+if [ ! -d ~/.config/tmux/plugins/catppuccin ]; then
+	printf "[$0]: catppuccin tmux theme not found. Installing..."
+	mkdir -p ~/.config/tmux/plugins/catppuccin
+	git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+fi
+
 echo "Finished installing config files"

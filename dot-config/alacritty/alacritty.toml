@@ -3,7 +3,7 @@ import = [
   "~/.config/alacritty/catppuccin-macchiato.toml"
 ]
 
-working_directory = "/Users/jonathanlind/development/"
+working_directory = "development"
 
 shell = { program = "/opt/homebrew/bin/fish", args = ["-l"] }
 
@@ -14,7 +14,7 @@ history = 50000
 size = 14
 
 [font.normal]
-family = "FiraCode Nerd Font Mono"
+family = "FiraCode Nerd Font"
 style = "Regular"
 
 [env]

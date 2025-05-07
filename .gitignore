@@ -6,3 +6,5 @@ lazy-lock.json
 
 .log
 
+tmux/
+iterm2
