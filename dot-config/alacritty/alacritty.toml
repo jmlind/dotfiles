@@ -1,12 +1,4 @@
 
-import = [
-  "~/.config/alacritty/catppuccin-macchiato.toml"
-]
-
-working_directory = "development"
-
-shell = { program = "/opt/homebrew/bin/fish", args = ["-l"] }
-
 [scrolling]
 history = 50000
 
@@ -19,3 +11,11 @@ style = "Regular"
 
 [env]
 TERM = "xterm-256color"
+
+[general]
+
+working_directory = "development"
+
+import = [
+  "~/.config/alacritty/catppuccin-macchiato.toml"
+]
