@@ -7,19 +7,23 @@ if ! command -v stow &> /dev/null; then
 fi
 
 user=`whoami`
-echo "Installing dotfiles for $user into $HOME"
+echo "[$0]: Installing dotfiles for $user into $HOME"
 
-# stow using dotfiles syntax, transforming dot- prefixed directories to .<dir> 
-stow -Rv --dotfiles -t ~/ .
+for dir in */; do
+	dirname=${dir%/}
+	read -p "Install $dirname? (Y/n): " response
 
-# todo
-# test .config
-# test .tmux.conf
+	if [[ "$response" =~ ^[Yy]$ ]]; then
+		stow -v $dirname
+	fi
+done
 
 if [ ! -d ~/.config/tmux/plugins/catppuccin ]; then
-	printf "[$0]: catppuccin tmux theme not found. Installing..."
-	mkdir -p ~/.config/tmux/plugins/catppuccin
-	git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+	read -p "Install catppuccin tmux theme? (Y/n): " response
+	if [[ "$response" =~ ^[Yy]$ ]]; then
+		mkdir -p ~/.config/tmux/plugins/catppuccin
+		git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+	fi
 fi
 
 echo "Finished installing config files"
