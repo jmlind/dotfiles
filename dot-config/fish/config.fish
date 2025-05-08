@@ -11,7 +11,7 @@ end
 
 alias vim "nvim"
 alias ll "eza -alh"
-alias lt "eza -alhT"
+alias lt "eza -alhT --level=2"
 alias ls "eza -a"
 
 eval (direnv hook fish)
