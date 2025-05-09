@@ -3,7 +3,7 @@
 
 set -x OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 set -x EDITOR nvim
-set -p PATH $HOME/bin $ASDF_DATA_DIR/shims /run/current-system/sw/bin
+# set -p PATH $HOME/bin $ASDF_DATA_DIR/shims /run/current-system/sw/bin
 
 if uname -s | string match -q "Darwin"
 	set -p PATH /opt/homebrew/bin
@@ -18,5 +18,5 @@ eval (direnv hook fish)
 
 starship init fish | source
 
-source ~/.asdf/asdf.fish
+# source ~/.asdf/asdf.fish
 
