@@ -2,7 +2,11 @@
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "pulseaudio", "battery", "clock"],
+  "modules-right": ["network", "pulseaudio", "memory", "clock"],
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
   "clock": {
     "format": "<span foreground='#f5c2e7'> </span>{:%a %d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -21,6 +25,10 @@
     "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
     "format-icons": ["", "", "", "", ""],
     "tooltip-format": "{time}"
+  },
+  "memory": {
+    "interval": 30,
+    "format": "ico {used:0.1f}G/{total:0.1f}G"
   },
   "network": {
     "format-wifi": "<span size='13000' foreground='#f5e0dc'>  </span>{essid}",
