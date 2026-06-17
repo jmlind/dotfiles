@@ -35,10 +35,11 @@
     # TODO: Use id arm to get the UID and GID for the arm user after creation
     environment = {
       ARM_UID = "1001"; # UID of the 'arm' user on the host system
-      ARM_GID = "987"; # GID of the 'arm' group on the host system
+      ARM_GID = "994"; # GID of the 'arm' group on the host system
     };
     # Mount 'host directory' to 'container directory'
     volumes = [
+      "/mnt/arm:/mnt/arm"
       "/home/arm:/home/arm"
       "/home/arm/music:/home/arm/music"
       "/home/arm/logs:/home/arm/logs"

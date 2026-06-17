@@ -8,13 +8,17 @@ in {
     ./hardware-configuration.nix
     ./arm.nix
     #    ./mars.nix
-    #    ./jellyfin.nix
+    ./jellyfin.nix
+    ./n8n.nix
+    ./caddy.nix
+    ./immich.nix
   ];
 
   nix = {
     settings.auto-optimise-store = true;
     settings.trusted-users = [ hostname ];
     settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.download-buffer-size = 524288000;
     gc = {
       automatic = true;
       dates = "weekly";
@@ -45,10 +49,15 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver.enable = true;
+  services.getty.autologinUser = "homelab";
+
+  # hyprland
+  programs.hyprland.enable = true;
+
+  #services.xserver.enable = true;
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
 
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
@@ -58,20 +67,34 @@ in {
   systemd.tmpfiles.rules =
     [ "d /mnt/media 0755 homelab users -" "d /mnt/arm 0755 arm arm -" ];
 
+  # TODO: sops/age credential management
   systemd.mounts = [
     {
       enable = true;
       what = "//mars/media";
       where = "/mnt/media";
       type = "cifs";
-      options = "rw"
+      options = "rw,credentials=/etc/nixos/mars-secrets,uid=1000,gid=100";
     }
     {
       enable = true;
       what = "//mars/media";
       where = "/mnt/arm";
       type = "cifs";
-      options = "rw"
+      options = "rw,credentials=/etc/nixos/mars-secrets,uid=1001,gid=994";
+    }
+  ];
+
+  systemd.automounts = [
+    {
+      description = "Automount for /mnt/media on NAS";
+      where = "/mnt/media";
+      wantedBy = [ "multi-user.target" ];
+    }
+    {
+      description = "Automount for /mnt/arm on NAS";
+      where = "/mnt/arm";
+      wantedBy = [ "multi-user.target" ];
     }
   ];
 
@@ -91,6 +114,7 @@ in {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIC00UW7jJmEnv1f8T9iXGdjmwJbx33cAHGnAByn8ZR jonathanlind@Jonathans-MacBook-Pro.local"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANroqKe1n3W6W0T+wQzfOExgmg0be+iw1kO22QrfEf8 jonathan@DESKTOP-SMJ6Q81"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCTrHuvuR8Typ/NdoCxm+mFD4ve+SD5m6HcN3vhN3Fdrzpd2RljsyuJlIz46Opmudqf9BmvbMSQa0FlOpzLLWo2IyosYqMCfduYnWO34Icw29D3DRZrO9mrO8bVPBOlXKUjJ2cxrLewIhFqZVc5sI0of+rv3qNQl5m+novil3QGsjkNTjjqtA5y88XpnKmDK45I7GiaTf52Yzr1d81s5t2ltZcWg4mI/zJqNtv9tNElQ/B+yzSmD/OXL7eBv+8rT51tumLMn/sfVKZ14zSVZM6PpRgpTtJpzUOI6zMHkOJ8wSyd4DkEEth2ENHJ9mnT1Nkjfey0xrUvyjCINkReGJBmARHRCePw2momWKEKNS4bX8oKvTynJir7jmHRlQbjnOt5aa0UN+T4nPPl5bovMCvnUMpHctH7azHlDsk9y1TWWqZGlXrbVi93Lpxa15LHHlkGc6TR12VJ/CS8zsW7CyXg6cQt9Z/C1lwJ/6kySCcYhqeTNpIxgmIF8qbiqB40z3c= laptop@fedora"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
@@ -123,6 +147,8 @@ in {
     cifs-utils # mounting smb share
     sops
     age
+    kitty
+    pciutils # provides lspci
   ];
 
   programs.zsh.enable = true;
@@ -131,7 +157,7 @@ in {
   networking = {
     hostName = hostname;
     hostId = "ad1f0b4b";
-    firewall.allowedTCPPorts = [ 9090 ];
+    firewall.allowedTCPPorts = [ ];
   };
 
   # networking. enables connecting to user@${hostname}.local

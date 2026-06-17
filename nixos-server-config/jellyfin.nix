@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   services.jellyfin = {
     enable = true;
-    openFirewall = false;
+    openFirewall = true;
     user = "homelab";
-    mediaDirs = [ "/mnt/media/jellyfin" ];
+    group = "users";
   };
 
   #  services.nginx = {
