@@ -67,37 +67,6 @@ in {
   systemd.tmpfiles.rules =
     [ "d /mnt/media 0755 homelab users -" "d /mnt/arm 0755 arm arm -" ];
 
-  # TODO: sops/age credential management
-  systemd.mounts = [
-    {
-      enable = true;
-      what = "//mars/media";
-      where = "/mnt/media";
-      type = "cifs";
-      options = "rw,credentials=/etc/nixos/mars-secrets,uid=1000,gid=100";
-    }
-    {
-      enable = true;
-      what = "//mars/media";
-      where = "/mnt/arm";
-      type = "cifs";
-      options = "rw,credentials=/etc/nixos/mars-secrets,uid=1001,gid=994";
-    }
-  ];
-
-  systemd.automounts = [
-    {
-      description = "Automount for /mnt/media on NAS";
-      where = "/mnt/media";
-      wantedBy = [ "multi-user.target" ];
-    }
-    {
-      description = "Automount for /mnt/arm on NAS";
-      where = "/mnt/arm";
-      wantedBy = [ "multi-user.target" ];
-    }
-  ];
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";

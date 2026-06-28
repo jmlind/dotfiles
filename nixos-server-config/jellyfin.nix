@@ -1,4 +1,22 @@
 { pkgs, ... }: {
+  # mount nas for jellyfin
+  fileSystems."/mnt/media" = {
+    device = "//mars/media";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/nixos/mars-secrets"
+      "defaults"
+      "nofail"
+      "x-systemd.after=network-online.target" # Ensure network is up first
+      "x-systemd.requires=network-online.target"
+
+      "uid=1000" # homelab
+      "gid=100" # homelab
+      "file_mode=0770"
+      "dir_mode=0770"
+    ];
+  };
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;

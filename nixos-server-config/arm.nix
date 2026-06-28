@@ -7,6 +7,22 @@
     "d /home/arm/config 0755 arm arm -"
   ];
 
+  fileSystems."/mnt/arm" = {
+    device = "//mars/media/";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/nixos/mars-secrets"
+      "defaults"
+      "nofail"
+      "x-systemd.after=network-online.target" # Ensure network is up first
+      "x-systemd.requires=network-online.target"
+
+      "uid=1001" # arm
+      "gid=994" # arm
+      "file_mode=0770"
+      "dir_mode=0770"
+    ];
+  };
   # Load the 'sg' kernel module to allow the container to see disk drives
   boot.kernelModules = [ "sg" ];
 
