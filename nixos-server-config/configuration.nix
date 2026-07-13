@@ -118,6 +118,7 @@ in {
     age
     kitty
     pciutils # provides lspci
+    ripgrep
   ];
 
   programs.zsh.enable = true;
