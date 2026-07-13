@@ -46,7 +46,7 @@
   # Configure the ARM container
   virtualisation.oci-containers.containers."arm" = {
     autoStart = true; # Automatically start the container on boot
-    image = "automaticrippingmachine/automatic-ripping-machine:latest";
+    image = "automaticrippingmachine/automatic-ripping-machine:2.24.0";
     ports = [ "8080:8080" ];
     # TODO: Use id arm to get the UID and GID for the arm user after creation
     environment = {
