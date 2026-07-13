@@ -6,8 +6,8 @@ let hostname = "homelab";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./mars.nix
     ./arm.nix
-    #    ./mars.nix
     ./jellyfin.nix
     ./n8n.nix
     ./caddy.nix
@@ -63,9 +63,6 @@ in {
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
-
-  systemd.tmpfiles.rules =
-    [ "d /mnt/media 0755 homelab users -" "d /mnt/arm 0755 arm arm -" ];
 
   # Configure keymap in X11
   services.xserver.xkb = {

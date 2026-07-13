@@ -1,36 +1,19 @@
-{ pkgs, config, ... }:
-
-let nasMountPoint = "/mnt/immich";
-in {
+{ pkgs, config, ... }: {
   users.users.immich = {
-    isSystemUser = true;
+    isNormalUser = true;
+    description = "immich";
     group = "immich";
+    extraGroups = [ "nas-media" ];
   };
+
   users.groups.immich = { };
-
-  fileSystems."${nasMountPoint}" = {
-    device = "//mars/media/immich";
-    fsType = "cifs";
-    options = [
-      "credentials=/etc/nixos/mars-secrets"
-      "defaults"
-      "nofail"
-      "x-systemd.after=network-online.target" # Ensure network is up first
-      "x-systemd.requires=network-online.target"
-
-      "uid=${toString config.users.users.immich.uid}"
-      "gid=${toString config.users.groups.immich.gid}"
-      "file_mode=0770"
-      "dir_mode=0770"
-    ];
-  };
 
   services.immich = {
     enable = true;
     port = 2283;
     host = "0.0.0.0";
     openFirewall = true;
-    mediaLocation = nasMountPoint;
+    mediaLocation = "/mnt/media/immich";
     database = {
       enable = true;
       name = "immich";
@@ -39,6 +22,6 @@ in {
     };
   };
 
-  systemd.services.immich.after = [ "mnt-immich.mount" ];
-  systemd.services.immich.requires = [ "mnt-immich.mount" ];
+  # systemd.services.immich.after = [ "mnt-media.mount" ];
+  # systemd.services.immich.requires = [ "mnt-media.mount" ];
 }
