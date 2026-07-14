@@ -1,9 +1,9 @@
 { pkgs, ... }: {
+  users.users.jellyfin.extraGroups = [ "nas-media" ];
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;
-    user = "homelab";
-    group = "nas-media";
   };
 
   environment.systemPackages =

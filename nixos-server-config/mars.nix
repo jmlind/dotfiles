@@ -13,7 +13,7 @@
 
       "uid=1000" # homelab
       "gid=nas-media" # homelab
-      "file_mode=0644"
+      "file_mode=0664"
       "dir_mode=0775"
     ];
   };
