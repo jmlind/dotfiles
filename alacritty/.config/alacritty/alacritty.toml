@@ -1,0 +1,21 @@
+
+[scrolling]
+history = 50000
+
+[font]
+size = 14
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[env]
+TERM = "xterm-256color"
+
+[general]
+
+working_directory = "development"
+
+import = [
+  "~/.config/alacritty/catppuccin-macchiato.toml"
+]
