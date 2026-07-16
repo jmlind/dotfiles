@@ -12,6 +12,7 @@ in {
     ./n8n.nix
     ./caddy.nix
     ./immich.nix
+    ./watchdog.nix
   ];
 
   nix = {
