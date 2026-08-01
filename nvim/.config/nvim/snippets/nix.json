@@ -1,0 +1,53 @@
+{
+  "Dendritic Flake-Parts Feature Module": {
+    "prefix": "dendritic-feature",
+    "body": [
+      "{",
+      "  perSystem = { config, self', inputs', pkgs, system, ... }:",
+      "  {",
+      "    # Define packages, devShells, and formatting here",
+      "    packages.default = pkgs.stdenv.mkDerivation {",
+      "      name = \"${1:package-name}\";",
+      "      src = ./.;",
+      "    };",
+      "  };",
+      "",
+      "  # Define multi-subsystem exports (NixOS, Home Manager, Darwin)",
+      "  flake.nixosModules.${1:package-name} = { config, lib, pkgs, ... }:",
+      "    let",
+      "      cfg = config.services.${1:package-name};",
+      "    in",
+      "    {",
+      "      options.services.${1:package-name}.enable = lib.mkEnableOption \"${1:package-name} service\";",
+      "      config = lib.mkIf cfg.enable {",
+      "        environment.systemPackages = [ self'.packages.default ];",
+      "      };",
+      "    };",
+      "}"
+    ],
+    "description": "Scaffold a dendritic flake-parts module exporting packages and system configurations."
+  },
+
+  "Dendritic Host Module": {
+    "prefix": "dendritic-host",
+    "body": [
+      "{ self, ... }:",
+      "{",
+      "  # Host configuration composition entry point",
+      "  flake.nixosConfigurations.${1:hostname} = self.inputs.nixpkgs.lib.nixosSystem {",
+      "    system = \"x86_64-linux\";",
+      "    modules = [",
+      "      ./hardware-configuration.nix",
+      "      # Easily cross-reference other modules via top-level self output namespaces",
+      "      self.nixosModules.${2:feature-name}",
+      "      {",
+      "        networking.hostName = \"${1:hostname}\";",
+      "        services.${2:feature-name}.enable = true;",
+      "      }",
+      "    ];",
+      "  };",
+      "}"
+    ],
+    "description": "Scaffold a concise dendritic host module that composes existing global system features."
+  }
+}
