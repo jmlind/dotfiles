@@ -171,6 +171,8 @@ do
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
   vim.o.confirm = true
+  
+  vim.opt.textwidth = 80
 end
 
 -- ============================================================
@@ -794,12 +796,21 @@ do
     },
     -- You can also specify external formatters in here.
     formatters_by_ft = {
+      nix = { 'nixfmt' },
+      javascript = { 'prettierd' },
+      json = { 'prettierd' },
+      lua = { 'stylua' },
       -- rust = { 'rustfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
+    },
+    formatters = {
+      nixfmt = {
+        args = { '-' },
+      },
     },
   }
 
@@ -826,13 +837,13 @@ do
   vim.keymap.set({ 'i', 's' }, '<C-j>', function()
     if ls.jumpable(-1) then ls.jump(-1) end
   end, { silent = true })
-  
+
   -- `friendly-snippets` contains a variety of premade snippets.
   --    See the README about individual language/framework/plugin snippets:
   --    https://github.com/rafamadriz/friendly-snippets
 
   vim.pack.add { gh 'rafamadriz/friendly-snippets' }
-  require('luasnip.loaders.from_vscode').lazy_load({ paths = { "./snippets" }})
+  require('luasnip.loaders.from_vscode').lazy_load { paths = { './snippets' } }
 
   -- [[ Autocomplete Engine ]]
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
